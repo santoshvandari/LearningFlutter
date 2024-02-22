@@ -1,0 +1,39 @@
+
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final dio = Dio();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('MockApi CRUD'),
+      ),
+      body: ListView.builder(
+          itemCount: 20,
+          itemBuilder: (context, index) {
+            return ListTile(
+              leading: Icon(Icons.abc),
+              title: Text('$index'),
+              subtitle: Text('this is subtitle'),
+              trailing: Icon(Icons.edit, size: 20,),
+            );
+          }),
+    );
+  }
+  void getData() async{
+  var response = await dio.get('https://65d5cb34f6967ba8e3bc963e.mockapi.io/blog')
+
+ }
+}
+
+
