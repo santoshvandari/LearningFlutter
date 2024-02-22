@@ -57,7 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               print("this is presed");
                             },
                             icon: Icon(Icons.edit)),
-                        IconButton(onPressed: () {}, icon: Icon(Icons.delete))
+                        IconButton(
+                            onPressed: () {
+                              print("this is presed");
+                            },
+                            icon: Icon(Icons.delete))
                       ],
                     ),
                   );
