@@ -66,7 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void getData() async {
     var response =
-        await dio.get('https://65d5cb34f6967ba8e3bc963e.mockapi.io/blog');
+        // await dio.get('https://65d5cb34f6967ba8e3bc963e.mockapi.io/blog');
+        await dio.get('https://65d596c8f6967ba8e3bbe1cc.mockapi.io/blog');
     if (response.statusCode == 200) {
       setState(() {
         blogs = response.data;
