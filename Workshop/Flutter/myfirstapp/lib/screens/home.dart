@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:myfirstapp/screens/single.dart';
+import 'package:myfirstapp/screens/delete.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -37,10 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: blogs.length,
                 itemBuilder: (context, index) {
                   final blog = blogs[index];
+                  final id = blog['id'];
                   final title = blog['name'];
                   final avatar = blog['avatar'];
                   final description = blog['description'];
+                  print(description);
                   return ListTile(
+                    onTap: () => navigateToNextPageId(id),
                     leading: CircleAvatar(
                       backgroundImage: NetworkImage(avatar),
                     ),
@@ -58,14 +63,25 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                             icon: Icon(Icons.edit)),
                         IconButton(
-                            onPressed: () {
-                              print("this is presed");
+                            onPressed: () async {
+                              var data = await showDialog(
+                                  context: context, builder: (_) => Delete(id));
+                              if (data == true) {
+                                setState(() {
+                                  blogs.remove(blog);
+                                });
+                              }
                             },
                             icon: Icon(Icons.delete))
                       ],
                     ),
                   );
                 }));
+  }
+
+  void navigateToNextPageId(String id) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (_) => SingleScreen(id)));
   }
 
   void getData() async {
