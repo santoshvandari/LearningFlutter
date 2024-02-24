@@ -58,7 +58,6 @@ class _SingleScreenState extends State<SingleScreen> {
     if (response.statusCode == 200) {
       setState(() {
         blog = response.data;
-        print(blog);
         isLoading = false;
       });
     }
