@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:myfirstapp/screens/single.dart';
 import 'package:myfirstapp/screens/delete.dart';
+import 'package:myfirstapp/screens/addblog.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -23,60 +24,72 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Center(
-              child: Text(
-            'MockAPI CRUD',
-            style: TextStyle(color: Color.fromARGB(255, 230, 230, 230)),
-          )),
-          backgroundColor: const Color.fromARGB(255, 107, 91, 90),
-        ),
-        body: isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : ListView.builder(
-                itemCount: blogs.length,
-                itemBuilder: (context, index) {
-                  final blog = blogs[index];
-                  final id = blog['id'];
-                  final title = blog['name'];
-                  final avatar = blog['avatar'];
-                  final description = blog['description'];
-                  print(description);
-                  return ListTile(
-                    onTap: () => navigateToNextPageId(id),
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(avatar),
-                    ),
-                    title: Text(title),
-                    subtitle: Text(
-                      description,
-                      maxLines: 3,
-                    ),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              print("this is presed");
-                            },
-                            icon: Icon(Icons.edit)),
-                        IconButton(
-                            onPressed: () async {
-                              var data = await showDialog(
-                                  context: context, builder: (_) => Delete(id));
-                              if (data == true) {
-                                setState(() {
-                                  blogs.remove(blog);
-                                });
-                              }
-                            },
-                            icon: Icon(Icons.delete))
-                      ],
-                    ),
-                  );
-                }));
+      appBar: AppBar(
+        title: Center(
+            child: Text(
+          'MockAPI CRUD',
+          style: TextStyle(color: Color.fromARGB(255, 230, 230, 230)),
+        )),
+        backgroundColor: const Color.fromARGB(255, 107, 91, 90),
+      ),
+      body: isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              itemCount: blogs.length,
+              itemBuilder: (context, index) {
+                final blog = blogs[index];
+                final id = blog['id'];
+                final title = blog['name'];
+                final avatar = blog['avatar'];
+                final description = blog['description'];
+                print(description);
+                return ListTile(
+                  onTap: () => navigateToNextPageId(id),
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(avatar),
+                  ),
+                  title: Text(title),
+                  subtitle: Text(
+                    description,
+                    maxLines: 3,
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            print("this is presed");
+                          },
+                          icon: Icon(Icons.edit)),
+                      IconButton(
+                          onPressed: () async {
+                            var data = await showDialog(
+                                context: context, builder: (_) => Delete(id));
+                            if (data == true) {
+                              setState(() {
+                                blogs.remove(blog);
+                              });
+                            }
+                          },
+                          icon: Icon(Icons.delete))
+                    ],
+                  ),
+                );
+              }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          var blog =
+              await showDialog(context: context, builder: (_) => AddBlog());
+          if (blog == null) return;
+          setState(() {
+            blogs.insert(0, blog);
+          });
+        },
+        child: Icon(Icons.add),
+      ),
+    );
   }
 
   void navigateToNextPageId(String id) {
