@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:myfirstapp/screens/editblog.dart';
 import 'package:myfirstapp/screens/single.dart';
 import 'package:myfirstapp/screens/delete.dart';
 import 'package:myfirstapp/screens/addblog.dart';
@@ -59,8 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                          onPressed: () {
-                            print("this is presed");
+                          onPressed: () async {
+                            var data = await showDialog(
+                                context: context,
+                                builder: (_) => editblog(blog));
+                            if (blog == null) return;
+                            setState(() {
+                              blogs[index] = data;
+                            });
                           },
                           icon: Icon(Icons.edit)),
                       IconButton(
