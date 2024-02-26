@@ -29,6 +29,13 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    'assets/images/img.png',
+                    height: 500,
+                    width: 500,
+                  )),
+              Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   width: 500,
