@@ -1,6 +1,6 @@
 # currencyconverter
 
-A new Flutter project.
+A Project in  Flutter that will Convert given Currency in any other required form.
 
 ## Getting Started
 
