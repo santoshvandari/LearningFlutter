@@ -1,6 +1,6 @@
 # Flutter
 
-A new Flutter project.
+A Collection of Flutter Project For Learning Purpose. 
 
 ## Getting Started
 
