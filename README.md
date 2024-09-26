@@ -1,6 +1,6 @@
 # Flutter
 
-A Collection of Flutter Project For Learning Purpose. 
+A Collection of Flutter Project For Learning Purpose Only. 
 
 ## Getting Started
 
