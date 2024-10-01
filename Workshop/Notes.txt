@@ -1,1 +1,2 @@
 Flutter: 
+Flutter is a Cross Platform Mobile Devlopment framework developed by google. It uses Dart programming language. 
