@@ -4,10 +4,10 @@ class CurrencyConverter extends StatefulWidget {
   const CurrencyConverter({super.key});
 
   @override
-  State createState() => _CurrencyConverterHome();
+  State<CurrencyConverter> createState() => _CurrencyConverterHome();
 }
 
-class _CurrencyConverterHome extends State {
+class _CurrencyConverterHome extends State<CurrencyConverter> {
   double convertedvalue = 0;
   double exchangerate = 144;
   final TextEditingController textEditingController = TextEditingController();
