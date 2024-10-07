@@ -1,12 +1,19 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class CurrencyConverter extends StatelessWidget {
+class CurrencyConverter extends StatefulWidget {
   const CurrencyConverter({super.key});
 
   @override
+  State createState() => _CurrencyConverterHome();
+}
+
+class _CurrencyConverterHome extends State {
+  double convertedvalue = 0;
+  double exchangerate = 144;
+  final TextEditingController textEditingController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
-    int calculatedvalue = 0;
     return Scaffold(
       backgroundColor: const Color.fromRGBO(36, 54, 66, 1),
       appBar: AppBar(
@@ -20,22 +27,26 @@ class CurrencyConverter extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Text Area
-            const Text(
-              "0",
-              style: TextStyle(
-                fontSize: 50,
-                color: Color.fromRGBO(226, 241, 231, 1),
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "NPR ${convertedvalue.toStringAsFixed(2)}",
+                style: const TextStyle(
+                  fontSize: 50,
+                  color: Color.fromRGBO(226, 241, 231, 1),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
 
             // Input field
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: TextField(
-                style: TextStyle(
+                controller: textEditingController,
+                style: const TextStyle(
                     color: Color.fromRGBO(226, 241, 231, 1), fontSize: 16),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(15, 5, 10, 5),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -64,15 +75,25 @@ class CurrencyConverter extends StatelessWidget {
                   prefixIcon: Icon(Icons.monetization_on_outlined),
                   prefixIconColor: Color.fromRGBO(226, 241, 236, 1),
                 ),
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
               ),
             ),
 
             // button
             TextButton(
               onPressed: () {
-                if (kDebugMode) {
-                  debugPrint("Button Clicked");
+                try {
+                  double value = double.parse(textEditingController.text);
+                  debugPrint(value.toString());
+                  setState(() {
+                    convertedvalue = value * exchangerate;
+                  });
+                } catch (e) {
+                  debugPrint(e.toString());
+                  setState(() {
+                    convertedvalue = 0.0;
+                  });
                 }
               },
               style: TextButton.styleFrom(

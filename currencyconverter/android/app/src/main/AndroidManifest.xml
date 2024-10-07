@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="currencyconverter"
+        android:label="Currency Converter"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/playstore">
         <activity
             android:name=".MainActivity"
             android:exported="true"
