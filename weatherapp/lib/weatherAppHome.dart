@@ -19,7 +19,6 @@ class _WeatherAppHomeState extends State<WeatherAppHome> {
         title: const Text(
           "Weather App",
           style: TextStyle(
-            color: Colors.white,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -30,7 +29,6 @@ class _WeatherAppHomeState extends State<WeatherAppHome> {
               debugPrint("Testing ");
             },
             icon: const Icon(Icons.refresh),
-            color: Colors.white,
           ),
         ],
       ),
@@ -90,9 +88,13 @@ class _WeatherAppHomeState extends State<WeatherAppHome> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: List.generate(10, (index) {
-                    return const WeatherForecastCard();
-                  }),
+                  children: List.generate(
+                    10,
+                    (index) {
+                      return const WeatherForecastCard(
+                          icon: Icons.cloud, time: "2:45", value: "302.1");
+                    },
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -104,9 +106,14 @@ class _WeatherAppHomeState extends State<WeatherAppHome> {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  AdditionalInformation(),
-                  AdditionalInformation(),
-                  AdditionalInformation(),
+                  AdditionalInformation(
+                      icon: Icons.water_drop, label: "Humidity", value: "90"),
+                  AdditionalInformation(
+                      icon: Icons.air, label: "Wind Speed", value: "6.67"),
+                  AdditionalInformation(
+                      icon: Icons.beach_access,
+                      label: "Pressure",
+                      value: "1006"),
                 ],
               )
             ],
