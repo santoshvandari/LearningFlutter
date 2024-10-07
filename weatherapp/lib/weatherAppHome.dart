@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:weatherapp/additionalinfoitem.dart';
+import 'package:weatherapp/weatherforcastitem.dart';
 
 class WeatherAppHome extends StatefulWidget {
   const WeatherAppHome({super.key});
@@ -93,49 +95,22 @@ class _WeatherAppHomeState extends State<WeatherAppHome> {
                   }),
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              const SizedBox(height: 20),
+              const Text(
+                "Additional Information",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              const Placeholder(
-                fallbackHeight: 1000,
-              ),
+              const SizedBox(height: 8),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  AdditionalInformation(),
+                  AdditionalInformation(),
+                  AdditionalInformation(),
+                ],
+              )
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class WeatherForecastCard extends StatelessWidget {
-  const WeatherForecastCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        width: 100,
-        padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: const Column(
-          children: [
-            Text(
-              '03:30',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 8),
-            Icon(
-              Icons.cloud,
-              size: 32,
-            ),
-            SizedBox(height: 8),
-            Text(
-              "300.14",
-            )
-          ],
         ),
       ),
     );
