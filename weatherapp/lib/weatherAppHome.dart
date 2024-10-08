@@ -143,7 +143,7 @@ class _WeatherAppHomeState extends State<WeatherAppHome> {
                             itemCount: 20,
                             itemBuilder: (context, index) {
                               final weather = forecastWeather[index + 1];
-                              final time = DateFormat('HH:mm')
+                              final time = DateFormat.Hm()
                                   .format(DateTime.parse(weather["dt_txt"]));
                               final weatherstatus =
                                   weather['weather'][0]['main'];
@@ -151,7 +151,7 @@ class _WeatherAppHomeState extends State<WeatherAppHome> {
                                   icon: getIcon(weatherstatus),
                                   time: "$time UTC",
                                   value: "${weather['main']['temp']}",
-                                  status: "${weatherstatus}");
+                                  status: weatherstatus);
                             },
                           ),
                         ),
