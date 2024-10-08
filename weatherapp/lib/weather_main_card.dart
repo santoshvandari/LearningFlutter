@@ -2,16 +2,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class MainCard extends StatelessWidget {
+  final dynamic currentTemp;
+  final IconData icon;
+  final dynamic currentWeatherStatus;
   const MainCard({
     super.key,
     required this.currentTemp,
     required this.icon,
     required this.currentWeatherStatus,
   });
-
-  final dynamic currentTemp;
-  final IconData icon;
-  final dynamic currentWeatherStatus;
 
   @override
   Widget build(BuildContext context) {

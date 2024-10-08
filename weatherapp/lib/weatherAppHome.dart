@@ -15,19 +15,20 @@ class WeatherAppHome extends StatefulWidget {
 }
 
 class _WeatherAppHomeState extends State<WeatherAppHome> {
-  Future<Map<String, dynamic>> getWeatherInfo() async {
-    String url =
-        "https://api.openweathermap.org/data/2.5/forecast?q=Nepal&units=metric&APPID=d3db3a438bffd1f64b93c92253c8e4b7";
+  TextEditingController textEditingController = TextEditingController();
+  String cityName = "Nepal";
+  Future<Map<String, dynamic>> getWeatherInfo(String country) async {
+    final url =
+        "https://api.openweathermap.org/data/2.5/forecast?q=$country&units=metric&APPID=d3db3a438bffd1f64b93c92253c8e4b7";
     try {
       final res = await http.get(Uri.parse(url));
       final data = jsonDecode(res.body);
       if (data["cod"] != "200") {
-        throw "An Unexpected Error Occured!!!";
+        throw data["message"] ?? "An unexpected error occurred!";
       }
       return data;
-    } catch (ex) {
-      // throw "$ex";
-      throw "An Unexpected Error Occured!!!";
+    } catch (error) {
+      throw error.toString();
     }
   }
 
@@ -45,9 +46,7 @@ class _WeatherAppHomeState extends State<WeatherAppHome> {
         actions: [
           IconButton(
             onPressed: () {
-              setState(() {
-                getWeatherInfo();
-              });
+              setState(() {});
             },
             icon: const Icon(Icons.refresh),
           ),
@@ -56,17 +55,71 @@ class _WeatherAppHomeState extends State<WeatherAppHome> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Column(
+            Column(
               children: [
-                Text(
-                  "Nepal",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  child: TextField(
+                    controller: textEditingController,
+                    style: const TextStyle(fontSize: 16),
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.fromLTRB(15, 5, 10, 5),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
+                        ),
+                        borderSide: BorderSide(
+                          color: Color.fromRGBO(98, 149, 132, 1),
+                          style: BorderStyle.solid,
+                          width: 2,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
+                        ),
+                        borderSide: BorderSide(
+                          color: Color.fromRGBO(98, 149, 132, 1),
+                          style: BorderStyle.solid,
+                          width: 2,
+                        ),
+                      ),
+                      hintText: "Please Enter a City",
+                      prefixIcon: Icon(Icons.location_city),
+                      prefixIconColor: Color.fromRGBO(226, 241, 236, 1),
+                    ),
+                  ),
+                ),
+
+                // button
+                TextButton(
+                  onPressed: () {
+                    cityName = textEditingController.text;
+                    cityName = cityName.isEmpty ? "Nepal" : cityName;
+                    setState(() {});
+                  },
+                  style: TextButton.styleFrom(
+                    elevation: 10,
+                    backgroundColor: const Color.fromRGBO(256, 116, 120, 1),
+                    maximumSize: const Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: Text(
+                      "Check",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 10),
             FutureBuilder(
-              future: getWeatherInfo(),
+              future: getWeatherInfo(cityName),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
@@ -99,17 +152,18 @@ class _WeatherAppHomeState extends State<WeatherAppHome> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // const Center(
-                        //   child: Text(
-                        //     "Additional Info",
-                        //     style: TextStyle(
-                        //         fontSize: 24, fontWeight: FontWeight.bold),
-                        //   ),
-                        // ),
+                        Center(
+                          child: Text(
+                            cityName,
+                            style: const TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
+                          ),
+                        ),
                         MainCard(
-                            currentTemp: currentTemp,
-                            icon: icon,
-                            currentWeatherStatus: currentWeatherStatus),
+                          currentTemp: currentTemp,
+                          icon: icon,
+                          currentWeatherStatus: currentWeatherStatus,
+                        ),
                         const SizedBox(height: 20),
                         const Text(
                           "Weather Forecast",
