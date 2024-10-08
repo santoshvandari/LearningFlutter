@@ -56,7 +56,6 @@ class _WeatherAppHomeState extends State<WeatherAppHome> {
         actions: [
           IconButton(
             onPressed: () {
-              // debugPrint("Testing ");
               setState(() {
                 getWeatherInfo();
               });
