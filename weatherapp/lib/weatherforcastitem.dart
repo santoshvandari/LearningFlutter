@@ -20,7 +20,7 @@ class WeatherForecastCard extends StatelessWidget {
           children: [
             Text(
               time,
-              style: const TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 15),
             ),
             const SizedBox(height: 8),
             Icon(
