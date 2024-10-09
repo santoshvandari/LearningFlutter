@@ -28,7 +28,10 @@ class _WeatherAppHomeState extends State<WeatherAppHome> {
       }
       return data;
     } catch (error) {
-      throw error.toString();
+      if (error.toString() == "city not found") {
+        throw "City Not Found";
+      }
+      throw "An Unexpected Error Occured!";
     }
   }
 
