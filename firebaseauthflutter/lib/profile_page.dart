@@ -16,16 +16,10 @@ class ProfilePage extends StatelessWidget {
       showMFATile: true,
       actions: [
         SignedOutAction((context) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const SignIn()),
-          );
+          Navigator.pushReplacementNamed(context, '/signin');
         }),
         AccountDeletedAction((context, user) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const SignIn()),
-          );
+          Navigator.pushReplacementNamed(context, '/signin');
         })
       ],
     );
