@@ -4,11 +4,6 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
-
-await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-);
-
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
 /// Example:
@@ -56,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCZsnQtQC7QL46doi4wok8hdMlUNAACVek',
-    appId: '1:779613068862:android:d1b3aa6da82ca0b404bb6f',
+    appId: '1:779613068862:android:b36bbfc13335451504bb6f',
     messagingSenderId: '779613068862',
     projectId: 'fir-authflutter-c0814',
     storageBucket: 'fir-authflutter-c0814.appspot.com',
@@ -70,6 +65,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'fir-authflutter-c0814.appspot.com',
     iosBundleId: 'com.example.firebaseauthflutter',
   );
-
-  
 }
