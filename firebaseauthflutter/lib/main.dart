@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     final initialRoute = userStatus ? "/profile" : "/signin";
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: initialRoute,
       routes: {
         "/signin": (context) => const SignIn(),
