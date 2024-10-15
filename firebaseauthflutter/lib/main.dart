@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebaseauthflutter/firebase_options.dart';
 import 'package:firebaseauthflutter/profile_page.dart';
@@ -17,12 +18,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userStatus = FirebaseAuth.instance.currentUser != null;
+    final initialRoute = userStatus ? "/profile" : "/signin";
+
     return MaterialApp(
+      initialRoute: initialRoute,
       routes: {
         "/signin": (context) => const SignIn(),
         "/profile": (context) => const ProfilePage(),
       },
-      home: const SignIn(),
     );
   }
 }

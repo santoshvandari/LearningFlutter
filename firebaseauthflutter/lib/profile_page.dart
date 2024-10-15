@@ -1,5 +1,4 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebaseauthflutter/sign_in.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -10,7 +9,7 @@ class ProfilePage extends StatelessWidget {
     final provider = [EmailAuthProvider()];
     return ProfileScreen(
       appBar: AppBar(
-        title: Text("Profile"),
+        title: const Text("Profile"),
       ),
       providers: provider,
       showMFATile: true,
