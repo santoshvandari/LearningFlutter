@@ -11,6 +11,10 @@ class SignIn extends StatelessWidget {
       // PhoneAuthProvider(),
     ];
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Sign In"),
+        centerTitle: true,
+      ),
       body: SignInScreen(
         providers: authProvider,
         actions: [

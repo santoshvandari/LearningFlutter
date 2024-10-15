@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebaseauthflutter/firebase_options.dart';
-import 'package:firebaseauthflutter/profile_page.dart';
-import 'package:firebaseauthflutter/sign_in.dart';
+import 'package:firebaseauthflutter/routes.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -22,12 +21,12 @@ class MyApp extends StatelessWidget {
     final initialRoute = userStatus ? "/profile" : "/signin";
 
     return MaterialApp(
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
       debugShowCheckedModeBanner: false,
       initialRoute: initialRoute,
-      routes: {
-        "/signin": (context) => const SignIn(),
-        "/profile": (context) => const ProfilePage(),
-      },
+      routes: routes,
     );
   }
 }
